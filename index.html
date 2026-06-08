@@ -1,33 +1,376 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>CyberArena-Pro</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberArena-Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00ffe7;
+    --magenta: #ff003c;
+    --yellow: #ffe600;
+    --bg: #060610;
+    --card: #0d0d1f;
+    --border: rgba(0,255,231,0.15);
+  }
 
-    <link rel="stylesheet" href="style.css">
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: #c8d8f0;
+    font-family: 'Share Tech Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,231,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,231,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 2px,
+      rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 80px 0 60px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--cyan);
+    border: 1px solid var(--border);
+    padding: 6px 18px;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    animation: fadeUp 0.6s ease both, flicker 8s 1s infinite;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.4rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 0 0 40px rgba(0,255,231,0.4), 0 0 80px rgba(0,255,231,0.15);
+    animation: fadeUp 0.6s 0.1s ease both, glitch 6s 2s infinite;
+  }
+
+  .hero h1 span { color: var(--cyan); }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7a8fb0;
+    letter-spacing: 1px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-line {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+    margin: 32px auto;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+    animation: fadeUp 0.6s 0.35s ease both;
+  }
+
+  .badge {
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 5px 14px;
+    border: 1px solid;
+    text-transform: uppercase;
+  }
+
+  .badge-cyan { border-color: var(--cyan); color: var(--cyan); }
+  .badge-mag  { border-color: var(--magenta); color: var(--magenta); }
+  .badge-yel  { border-color: var(--yellow); color: var(--yellow); }
+
+  .cta-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 32px;
+    border: 2px solid;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--cyan);
+    border-color: var(--cyan);
+    color: #060610;
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--cyan);
+    box-shadow: 0 0 24px rgba(0,255,231,0.4);
+  }
+
+  .btn-outline {
+    background: transparent;
+    border-color: rgba(0,255,231,0.4);
+    color: var(--cyan);
+  }
+  .btn-outline:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 24px rgba(0,255,231,0.2);
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 36px;
+  }
+
+  .features-section {
+    margin: 60px 0;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .feature-card {
+    background: var(--card);
+    padding: 28px 24px;
+    border-left: 3px solid transparent;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,255,231,0.04), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .feature-card:hover { border-left-color: var(--cyan); transform: translateY(-2px); }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+
+  .feature-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  .feature-desc { font-size: 12px; color: #5a7090; line-height: 1.6; }
+
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    margin: 60px 0;
+    animation: fadeUp 0.7s 0.6s ease both;
+  }
+
+  .stat { background: var(--card); padding: 28px; text-align: center; }
+
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--cyan);
+    text-shadow: 0 0 20px rgba(0,255,231,0.5);
+  }
+
+  .stat-label { font-size: 11px; letter-spacing: 2px; color: #5a7090; margin-top: 6px; text-transform: uppercase; }
+
+  .tech-section { margin: 60px 0; animation: fadeUp 0.7s 0.7s ease both; }
+
+  .tech-list { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  .tech-pill {
+    background: rgba(0,255,231,0.05);
+    border: 1px solid var(--border);
+    color: #7a9ab8;
+    font-size: 12px;
+    letter-spacing: 1px;
+    padding: 8px 18px;
+    transition: all 0.2s;
+  }
+
+  .tech-pill:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,255,231,0.08); }
+
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11px;
+    color: #3a5070;
+    animation: fadeUp 0.7s 0.8s ease both;
+  }
+
+  .footer a { color: var(--cyan); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
+
+  @keyframes glitch {
+    0%, 95%, 100% { clip-path: none; transform: none; }
+    96% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translateX(-4px); color: var(--magenta); }
+    97% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translateX(4px); color: var(--cyan); }
+    98% { clip-path: none; transform: none; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; } 93% { opacity: 0.7; } 94% { opacity: 1; }
+  }
+
+  @media (max-width: 540px) {
+    .stats-bar { grid-template-columns: 1fr; }
+    .hero { padding: 48px 0 40px; }
+  }
+</style>
 </head>
 <body>
+<div class="container">
 
-    <h1>🎮 CyberArena-Pro</h1>
+  <div class="hero">
+    <div class="hero-tag">🎮 &nbsp; Open Source Game Project</div>
+    <h1>Cyber<span>Arena</span><br>Pro</h1>
+    <p class="hero-sub">A professional 2D action game built with Python and Pygame</p>
+    <div class="hero-line"></div>
+    <div class="badges">
+      <span class="badge badge-cyan">Python</span>
+      <span class="badge badge-mag">Pygame</span>
+      <span class="badge badge-yel">SQLite</span>
+      <span class="badge badge-cyan">Open Source</span>
+    </div>
+    <div class="cta-group">
+      <a href="https://github.com/Anukarsh123/CyberArena-Pro" class="btn btn-primary">View Source Code</a>
+      <a href="https://github.com/Anukarsh123/CyberArena-Pro/archive/refs/heads/main.zip" class="btn btn-outline">Download ZIP</a>
+    </div>
+  </div>
 
-    <p>
-        A professional 2D action game built with Python and Pygame.
-    </p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-num">2D</div><div class="stat-label">Action Game</div></div>
+    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Core Features</div></div>
+    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Open Source</div></div>
+  </div>
 
-    <h2>Features</h2>
+  <div class="features-section">
+    <div class="section-label">// capabilities</div>
+    <div class="section-title">Game Features</div>
+    <div class="features-grid">
+      <div class="feature-card"><span class="feature-icon">🤖</span><div class="feature-name">Enemy AI</div><div class="feature-desc">Intelligent enemy behaviors with pathfinding and attack patterns.</div></div>
+      <div class="feature-card"><span class="feature-icon">👾</span><div class="feature-name">Boss Battles</div><div class="feature-desc">Epic multi-phase boss encounters with unique mechanics.</div></div>
+      <div class="feature-card"><span class="feature-icon">⚡</span><div class="feature-name">XP System</div><div class="feature-desc">Level up your character and unlock new abilities over time.</div></div>
+      <div class="feature-card"><span class="feature-icon">🎒</span><div class="feature-name">Inventory</div><div class="feature-desc">Collect, manage and equip items throughout your journey.</div></div>
+      <div class="feature-card"><span class="feature-icon">🏆</span><div class="feature-name">Achievements</div><div class="feature-desc">Unlock achievements by completing in-game challenges.</div></div>
+      <div class="feature-card"><span class="feature-icon">🗄️</span><div class="feature-name">SQLite Database</div><div class="feature-desc">Persistent save system powered by a local SQLite database.</div></div>
+    </div>
+  </div>
 
-    <ul>
-        <li>Enemy AI</li>
-        <li>Boss Battles</li>
-        <li>XP System</li>
-        <li>Inventory</li>
-        <li>Achievements</li>
-        <li>Leaderboard</li>
-        <li>SQLite Database</li>
-    </ul>
+  <div class="features-section">
+    <div class="section-label">// compete</div>
+    <div class="section-title">Leaderboard System</div>
+    <div class="features-grid">
+      <div class="feature-card" style="grid-column:1/-1; border-left:3px solid var(--yellow)">
+        <span class="feature-icon">🥇</span>
+        <div class="feature-name">Global Leaderboard</div>
+        <div class="feature-desc">Track your high scores and compete with others. All scores stored persistently using SQLite — progress is never lost across sessions.</div>
+      </div>
+    </div>
+  </div>
 
-    <a href="https://github.com/Anukarsh123/CyberArena-Pro">
-        View Source Code
-    </a>
+  <div class="tech-section">
+    <div class="section-label">// built with</div>
+    <div class="section-title">Tech Stack</div>
+    <div class="tech-list">
+      <span class="tech-pill">Python 3</span>
+      <span class="tech-pill">Pygame</span>
+      <span class="tech-pill">SQLite3</span>
+      <span class="tech-pill">Object-Oriented Design</span>
+      <span class="tech-pill">State Machine AI</span>
+      <span class="tech-pill">Sprite Rendering</span>
+    </div>
+  </div>
 
+  <div class="footer">
+    <span>© 2026 CyberArena-Pro · <a href="https://github.com/Anukarsh123/CyberArena-Pro">GitHub</a></span>
+    <span>Built by <a href="https://github.com/Anukarsh123">Anukarsh123</a></span>
+  </div>
+
+</div>
 </body>
 </html>
