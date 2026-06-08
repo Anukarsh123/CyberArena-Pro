@@ -1,62 +1,90 @@
 # 🎮 CyberArena-Pro
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue)
-![Pygame](https://img.shields.io/badge/Pygame-2.x-green)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+A professional 2D action game developed using Python and Pygame, featuring player progression, enemy AI, boss battles, inventory management, achievements, authentication, and persistent game data storage.
 
-A professional 2D action game built with Python and Pygame featuring enemy AI, score tracking, collision detection, and SQLite integration.
+## 🚀 Features
 
-## ✨ Features
+* Player Movement System
+* Enemy AI
+* Shooting Mechanism
+* Health Bar System
+* Boss Battles
+* XP & Level Progression
+* Inventory Management
+* Achievement System
+* User Authentication
+* Save & Load Game
+* SQLite Database Integration
+* Leaderboard System
+* Shop System
+* Sound Manager
+* Settings Menu
 
-- Player Movement (WASD)
-- Enemy AI
-- Collision Detection
-- Score System
-- SQLite Database
-- Modular Architecture
-- Easy to Extend
+## 🛠 Technologies Used
+
+* Python
+* Pygame
+* SQLite
+* Object-Oriented Programming (OOP)
 
 ## 📂 Project Structure
 
 CyberArena-Pro/
 ├── main.py
-├── src/
-├── assets/
-├── database/
-├── saves/
+├── player.py
+├── enemy.py
+├── boss.py
+├── bullet.py
+├── database.py
+├── login.py
+├── leaderboard.py
+├── inventory.py
+├── achievements.py
+├── xp_system.py
+├── game_state.py
+├── settings_menu.py
+├── shop.py
+├── sound_manager.py
+├── ui.py
+└── savegame.py
 
-## 🚀 Installation
+## ⚡ Installation
 
-```bash
-git clone https://github.com/YOUR_USERNAME/CyberArena-Pro.git
+git clone https://github.com/Anukarsh123/CyberArena-Pro.git
+
 cd CyberArena-Pro
+
 pip install -r requirements.txt
+
 python main.py
-```
 
 ## 📸 Screenshots
 
-Add screenshots here after running the game.
+### Gameplay
 
-## 🔮 Future Improvements
+(Add gameplay screenshot)
 
-- Login System
-- XP & Levels
-- Boss Battles
-- Inventory System
-- Leaderboards
-- Save/Load System
+### Boss Battle
+
+(Add boss battle screenshot)
+
+### Leaderboard
+
+(Add leaderboard screenshot)
+
+## 🔮 Future Enhancements
+
+* Multiplayer Support
+* Character Skins
+* Particle Effects
+* Quest System
+* Daily Rewards
+* Cloud Save
 
 ## 👨‍💻 Author
 
 Anukarsh C
-## Features
 
-- Authentication System
-- Leaderboard
-- Save/Load Game
-- XP & Leveling
-- Achievement System
-- Inventory System
-- Boss Battles
-- SQLite Integration
+## 📄 License
+
+This project is licensed under the MIT License.
