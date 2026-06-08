@@ -1,0 +1,16 @@
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+}
+
+h1{
+    color:#00ffcc;
+}
+
+a{
+    color:yellow;
+    text-decoration:none;
+    font-size:20px;
+}
