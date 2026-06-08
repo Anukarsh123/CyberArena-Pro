@@ -50,3 +50,13 @@ Add screenshots here after running the game.
 ## 👨‍💻 Author
 
 Anukarsh C
+## Features
+
+- Authentication System
+- Leaderboard
+- Save/Load Game
+- XP & Leveling
+- Achievement System
+- Inventory System
+- Boss Battles
+- SQLite Integration
