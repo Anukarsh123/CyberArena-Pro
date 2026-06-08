@@ -6,371 +6,301 @@
 <title>CyberArena-Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --cyan: #00ffe7;
-    --magenta: #ff003c;
-    --yellow: #ffe600;
-    --bg: #060610;
-    --card: #0d0d1f;
-    --border: rgba(0,255,231,0.15);
-  }
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--cyan:#00ffe7;--mag:#ff003c;--yel:#ffe600;--bg:#060610;--card:#0d0d1f;--border:rgba(0,255,231,0.15);}
+body{background:var(--bg);color:#c8d8f0;font-family:'Share Tech Mono',monospace;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,255,231,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,231,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:0 24px 80px;}
+.hero{text-align:center;padding:60px 0 40px;}
+.tag{display:inline-block;font-size:11px;letter-spacing:4px;color:var(--cyan);border:1px solid var(--border);padding:6px 18px;margin-bottom:24px;text-transform:uppercase;}
+h1{font-family:'Orbitron',sans-serif;font-size:clamp(2rem,8vw,4.5rem);font-weight:900;color:#fff;line-height:1;text-shadow:0 0 40px rgba(0,255,231,0.4);}
+h1 span{color:var(--cyan);}
+.sub{margin-top:16px;font-size:13px;color:#7a8fb0;letter-spacing:1px;}
+.line{width:100px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);margin:28px auto;}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;}
+.badge{font-size:10px;letter-spacing:2px;padding:4px 12px;border:1px solid;text-transform:uppercase;}
+.bc{border-color:var(--cyan);color:var(--cyan);}
+.bm{border-color:var(--mag);color:var(--mag);}
+.by{border-color:var(--yel);color:var(--yel);}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.btn{font-family:'Orbitron',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:12px 28px;border:2px solid;transition:all 0.2s;display:inline-block;cursor:pointer;}
+.btn-p{background:var(--cyan);border-color:var(--cyan);color:#060610;}
+.btn-p:hover{background:transparent;color:var(--cyan);box-shadow:0 0 20px rgba(0,255,231,0.4);}
+.btn-o{background:transparent;border-color:rgba(0,255,231,0.4);color:var(--cyan);}
+.btn-o:hover{border-color:var(--cyan);box-shadow:0 0 20px rgba(0,255,231,0.2);}
+.btn-play{background:var(--yel);border-color:var(--yel);color:#060610;font-size:13px;padding:14px 40px;}
+.btn-play:hover{background:transparent;color:var(--yel);box-shadow:0 0 20px rgba(255,230,0,0.4);}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--border);margin:48px 0;}
+.stat{background:var(--card);padding:24px;text-align:center;}
+.stat-n{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;color:var(--cyan);text-shadow:0 0 16px rgba(0,255,231,0.5);}
+.stat-l{font-size:10px;letter-spacing:2px;color:#5a7090;margin-top:4px;text-transform:uppercase;}
+.sec{margin:48px 0;}
+.sec-tag{font-size:10px;letter-spacing:5px;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;}
+.sec-title{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:28px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;background:var(--border);}
+.card{background:var(--card);padding:24px;border-left:3px solid transparent;transition:all 0.2s;}
+.card:hover{border-left-color:var(--cyan);transform:translateY(-2px);}
+.icon{font-size:1.4rem;margin-bottom:10px;display:block;}
+.card-title{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:6px;}
+.card-desc{font-size:11px;color:#5a7090;line-height:1.6;}
+.techs{display:flex;flex-wrap:wrap;gap:8px;}
+.tech{background:rgba(0,255,231,0.05);border:1px solid var(--border);color:#7a9ab8;font-size:11px;padding:6px 14px;transition:all 0.2s;}
+.tech:hover{border-color:var(--cyan);color:var(--cyan);}
+.footer{border-top:1px solid var(--border);padding-top:28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:#3a5070;}
+.footer a{color:var(--cyan);text-decoration:none;}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: #c8d8f0;
-    font-family: 'Share Tech Mono', monospace;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,231,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,231,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg, transparent, transparent 2px,
-      rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 24px 80px;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 80px 0 60px;
-  }
-
-  .hero-tag {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--cyan);
-    border: 1px solid var(--border);
-    padding: 6px 18px;
-    margin-bottom: 28px;
-    text-transform: uppercase;
-    animation: fadeUp 0.6s ease both, flicker 8s 1s infinite;
-  }
-
-  .hero h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: clamp(2.4rem, 8vw, 5rem);
-    font-weight: 900;
-    line-height: 1;
-    color: #fff;
-    text-shadow: 0 0 40px rgba(0,255,231,0.4), 0 0 80px rgba(0,255,231,0.15);
-    animation: fadeUp 0.6s 0.1s ease both, glitch 6s 2s infinite;
-  }
-
-  .hero h1 span { color: var(--cyan); }
-
-  .hero-sub {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #7a8fb0;
-    letter-spacing: 1px;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
-
-  .hero-line {
-    width: 120px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-    margin: 32px auto;
-    animation: fadeUp 0.6s 0.3s ease both;
-  }
-
-  .badges {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-    animation: fadeUp 0.6s 0.35s ease both;
-  }
-
-  .badge {
-    font-size: 10px;
-    letter-spacing: 2px;
-    padding: 5px 14px;
-    border: 1px solid;
-    text-transform: uppercase;
-  }
-
-  .badge-cyan { border-color: var(--cyan); color: var(--cyan); }
-  .badge-mag  { border-color: var(--magenta); color: var(--magenta); }
-  .badge-yel  { border-color: var(--yellow); color: var(--yellow); }
-
-  .cta-group {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    animation: fadeUp 0.6s 0.4s ease both;
-  }
-
-  .btn {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 14px 32px;
-    border: 2px solid;
-    transition: all 0.2s;
-    display: inline-block;
-  }
-
-  .btn-primary {
-    background: var(--cyan);
-    border-color: var(--cyan);
-    color: #060610;
-  }
-  .btn-primary:hover {
-    background: transparent;
-    color: var(--cyan);
-    box-shadow: 0 0 24px rgba(0,255,231,0.4);
-  }
-
-  .btn-outline {
-    background: transparent;
-    border-color: rgba(0,255,231,0.4);
-    color: var(--cyan);
-  }
-  .btn-outline:hover {
-    border-color: var(--cyan);
-    box-shadow: 0 0 24px rgba(0,255,231,0.2);
-  }
-
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 5px;
-    color: var(--cyan);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  .section-title {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 36px;
-  }
-
-  .features-section {
-    margin: 60px 0;
-    animation: fadeUp 0.7s 0.5s ease both;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2px;
-    background: var(--border);
-  }
-
-  .feature-card {
-    background: var(--card);
-    padding: 28px 24px;
-    border-left: 3px solid transparent;
-    transition: all 0.25s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,255,231,0.04), transparent);
-    opacity: 0;
-    transition: opacity 0.25s;
-  }
-
-  .feature-card:hover { border-left-color: var(--cyan); transform: translateY(-2px); }
-  .feature-card:hover::before { opacity: 1; }
-
-  .feature-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
-
-  .feature-name {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 8px;
-  }
-
-  .feature-desc { font-size: 12px; color: #5a7090; line-height: 1.6; }
-
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: var(--border);
-    margin: 60px 0;
-    animation: fadeUp 0.7s 0.6s ease both;
-  }
-
-  .stat { background: var(--card); padding: 28px; text-align: center; }
-
-  .stat-num {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--cyan);
-    text-shadow: 0 0 20px rgba(0,255,231,0.5);
-  }
-
-  .stat-label { font-size: 11px; letter-spacing: 2px; color: #5a7090; margin-top: 6px; text-transform: uppercase; }
-
-  .tech-section { margin: 60px 0; animation: fadeUp 0.7s 0.7s ease both; }
-
-  .tech-list { display: flex; flex-wrap: wrap; gap: 10px; }
-
-  .tech-pill {
-    background: rgba(0,255,231,0.05);
-    border: 1px solid var(--border);
-    color: #7a9ab8;
-    font-size: 12px;
-    letter-spacing: 1px;
-    padding: 8px 18px;
-    transition: all 0.2s;
-  }
-
-  .tech-pill:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,255,231,0.08); }
-
-  .footer {
-    border-top: 1px solid var(--border);
-    padding-top: 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    font-size: 11px;
-    color: #3a5070;
-    animation: fadeUp 0.7s 0.8s ease both;
-  }
-
-  .footer a { color: var(--cyan); text-decoration: none; }
-  .footer a:hover { text-decoration: underline; }
-
-  @keyframes glitch {
-    0%, 95%, 100% { clip-path: none; transform: none; }
-    96% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translateX(-4px); color: var(--magenta); }
-    97% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translateX(4px); color: var(--cyan); }
-    98% { clip-path: none; transform: none; }
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    92% { opacity: 1; } 93% { opacity: 0.7; } 94% { opacity: 1; }
-  }
-
-  @media (max-width: 540px) {
-    .stats-bar { grid-template-columns: 1fr; }
-    .hero { padding: 48px 0 40px; }
-  }
+/* GAME */
+#game-section{margin:48px 0;}
+#game-wrap{position:relative;width:100%;height:500px;background:#060610;border:1px solid var(--border);overflow:hidden;}
+#gc{display:block;width:100%;height:100%;}
+#gui{position:absolute;top:0;left:0;width:100%;padding:8px 14px;display:flex;justify-content:space-between;align-items:center;pointer-events:none;}
+.gstat{color:var(--cyan);font-size:12px;font-weight:bold;letter-spacing:1px;}
+.bwrap{display:flex;align-items:center;gap:5px;}
+.bbg{width:100px;height:8px;background:#1a1a2e;border:1px solid #333;border-radius:1px;}
+.bfill{height:100%;border-radius:1px;transition:width 0.1s;}
+#hpf{background:var(--mag);}
+#xpf{background:var(--cyan);}
+#gscreen{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(6,6,16,0.93);color:#fff;gap:10px;}
+#gscreen h3{font-family:'Orbitron',sans-serif;font-size:18px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;}
+#gscreen p{font-size:11px;color:#7a8fb0;letter-spacing:1px;}
+#gbtn{margin-top:8px;background:var(--yel);color:#060610;border:none;padding:10px 28px;font-family:'Share Tech Mono',monospace;font-size:13px;font-weight:bold;letter-spacing:2px;cursor:pointer;text-transform:uppercase;}
+#gbtn:hover{background:#ccb800;}
+#gmsg{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);color:var(--yel);font-size:14px;font-weight:bold;letter-spacing:2px;pointer-events:none;opacity:0;transition:opacity 0.4s;text-align:center;}
+#gctrl{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);color:#3a5070;font-size:10px;letter-spacing:1px;pointer-events:none;}
+#glvl{color:var(--yel);font-size:12px;font-weight:bold;}
+#gscore{color:#fff;font-size:12px;}
+@media(max-width:540px){.stats{grid-template-columns:1fr;}.hero{padding:40px 0 30px;}#game-wrap{height:380px;}}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="wrap">
 
-  <div class="hero">
-    <div class="hero-tag">🎮 &nbsp; Open Source Game Project</div>
-    <h1>Cyber<span>Arena</span><br>Pro</h1>
-    <p class="hero-sub">A professional 2D action game built with Python and Pygame</p>
-    <div class="hero-line"></div>
-    <div class="badges">
-      <span class="badge badge-cyan">Python</span>
-      <span class="badge badge-mag">Pygame</span>
-      <span class="badge badge-yel">SQLite</span>
-      <span class="badge badge-cyan">Open Source</span>
-    </div>
-    <div class="cta-group">
-      <a href="https://github.com/Anukarsh123/CyberArena-Pro" class="btn btn-primary">View Source Code</a>
-      <a href="https://github.com/Anukarsh123/CyberArena-Pro/archive/refs/heads/main.zip" class="btn btn-outline">Download ZIP</a>
-    </div>
+<div class="hero">
+  <div class="tag">🎮 Open Source Game Project</div>
+  <h1>Cyber<span>Arena</span><br>Pro</h1>
+  <p class="sub">A professional 2D action game built with Python and Pygame</p>
+  <div class="line"></div>
+  <div class="badges">
+    <span class="badge bc">Python</span>
+    <span class="badge bm">Pygame</span>
+    <span class="badge by">SQLite</span>
+    <span class="badge bc">Open Source</span>
   </div>
-
-  <div class="stats-bar">
-    <div class="stat"><div class="stat-num">2D</div><div class="stat-label">Action Game</div></div>
-    <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Core Features</div></div>
-    <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Open Source</div></div>
+  <div class="btns">
+    <a href="https://github.com/Anukarsh123/CyberArena-Pro" class="btn btn-p">View Source Code</a>
+    <a href="https://github.com/Anukarsh123/CyberArena-Pro/archive/refs/heads/main.zip" class="btn btn-o">Download ZIP</a>
   </div>
-
-  <div class="features-section">
-    <div class="section-label">// capabilities</div>
-    <div class="section-title">Game Features</div>
-    <div class="features-grid">
-      <div class="feature-card"><span class="feature-icon">🤖</span><div class="feature-name">Enemy AI</div><div class="feature-desc">Intelligent enemy behaviors with pathfinding and attack patterns.</div></div>
-      <div class="feature-card"><span class="feature-icon">👾</span><div class="feature-name">Boss Battles</div><div class="feature-desc">Epic multi-phase boss encounters with unique mechanics.</div></div>
-      <div class="feature-card"><span class="feature-icon">⚡</span><div class="feature-name">XP System</div><div class="feature-desc">Level up your character and unlock new abilities over time.</div></div>
-      <div class="feature-card"><span class="feature-icon">🎒</span><div class="feature-name">Inventory</div><div class="feature-desc">Collect, manage and equip items throughout your journey.</div></div>
-      <div class="feature-card"><span class="feature-icon">🏆</span><div class="feature-name">Achievements</div><div class="feature-desc">Unlock achievements by completing in-game challenges.</div></div>
-      <div class="feature-card"><span class="feature-icon">🗄️</span><div class="feature-name">SQLite Database</div><div class="feature-desc">Persistent save system powered by a local SQLite database.</div></div>
-    </div>
-  </div>
-
-  <div class="features-section">
-    <div class="section-label">// compete</div>
-    <div class="section-title">Leaderboard System</div>
-    <div class="features-grid">
-      <div class="feature-card" style="grid-column:1/-1; border-left:3px solid var(--yellow)">
-        <span class="feature-icon">🥇</span>
-        <div class="feature-name">Global Leaderboard</div>
-        <div class="feature-desc">Track your high scores and compete with others. All scores stored persistently using SQLite — progress is never lost across sessions.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tech-section">
-    <div class="section-label">// built with</div>
-    <div class="section-title">Tech Stack</div>
-    <div class="tech-list">
-      <span class="tech-pill">Python 3</span>
-      <span class="tech-pill">Pygame</span>
-      <span class="tech-pill">SQLite3</span>
-      <span class="tech-pill">Object-Oriented Design</span>
-      <span class="tech-pill">State Machine AI</span>
-      <span class="tech-pill">Sprite Rendering</span>
-    </div>
-  </div>
-
-  <div class="footer">
-    <span>© 2026 CyberArena-Pro · <a href="https://github.com/Anukarsh123/CyberArena-Pro">GitHub</a></span>
-    <span>Built by <a href="https://github.com/Anukarsh123">Anukarsh123</a></span>
-  </div>
-
+  <button class="btn btn-play" onclick="document.getElementById('game-section').scrollIntoView({behavior:'smooth'})">▶ Play Demo</button>
 </div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">2D</div><div class="stat-l">Action Game</div></div>
+  <div class="stat"><div class="stat-n">6+</div><div class="stat-l">Core Features</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Open Source</div></div>
+</div>
+
+<!-- PLAYABLE DEMO -->
+<div class="sec" id="game-section">
+  <div class="sec-tag">// playable demo</div>
+  <div class="sec-title">Play in Browser</div>
+  <div id="game-wrap">
+    <canvas id="gc"></canvas>
+    <div id="gui">
+      <div class="bwrap"><span class="gstat">HP</span><div class="bbg"><div class="bfill" id="hpf" style="width:100%"></div></div><span class="gstat" id="hpv">100</span></div>
+      <div style="display:flex;gap:14px;align-items:center"><span id="glvl">LV 1</span><span id="gscore">SCORE: 0</span></div>
+      <div class="bwrap"><span class="gstat">XP</span><div class="bbg"><div class="bfill" id="xpf" style="width:0%"></div></div></div>
+    </div>
+    <div id="gmsg"></div>
+    <div id="gctrl">WASD — MOVE &nbsp;|&nbsp; SPACE — SHOOT &nbsp;|&nbsp; MOUSE — AIM</div>
+    <div id="gscreen">
+      <h3>CyberArena-Pro</h3>
+      <p>Browser Demo</p>
+      <p style="font-size:10px;color:#3a5070">WASD to move &nbsp;|&nbsp; SPACE to shoot &nbsp;|&nbsp; Survive!</p>
+      <button id="gbtn">Start Game</button>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-tag">// capabilities</div>
+  <div class="sec-title">Game Features</div>
+  <div class="grid">
+    <div class="card"><span class="icon">🤖</span><div class="card-title">Enemy AI</div><div class="card-desc">Intelligent enemy behaviors with pathfinding and attack patterns.</div></div>
+    <div class="card"><span class="icon">👾</span><div class="card-title">Boss Battles</div><div class="card-desc">Epic multi-phase boss encounters with unique mechanics.</div></div>
+    <div class="card"><span class="icon">⚡</span><div class="card-title">XP System</div><div class="card-desc">Level up your character and unlock new abilities.</div></div>
+    <div class="card"><span class="icon">🎒</span><div class="card-title">Inventory</div><div class="card-desc">Collect, manage and equip items throughout your journey.</div></div>
+    <div class="card"><span class="icon">🏆</span><div class="card-title">Achievements</div><div class="card-desc">Unlock achievements by completing in-game challenges.</div></div>
+    <div class="card"><span class="icon">🗄️</span><div class="card-title">SQLite Database</div><div class="card-desc">Persistent save system powered by a local SQLite database.</div></div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="sec-tag">// built with</div>
+  <div class="sec-title">Tech Stack</div>
+  <div class="techs">
+    <span class="tech">Python 3</span>
+    <span class="tech">Pygame</span>
+    <span class="tech">SQLite3</span>
+    <span class="tech">Object-Oriented Design</span>
+    <span class="tech">State Machine AI</span>
+    <span class="tech">Sprite Rendering</span>
+  </div>
+</div>
+
+<div class="footer">
+  <span>© 2026 CyberArena-Pro · <a href="https://github.com/Anukarsh123/CyberArena-Pro">GitHub</a></span>
+  <span>Built by <a href="https://github.com/Anukarsh123">Anukarsh123</a></span>
+</div>
+</div>
+
+<script>
+const canvas=document.getElementById('gc');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;}
+resize();
+let W=canvas.width,H=canvas.height;
+let gstate='menu',score=0,frame=0;
+let player,bullets,enemies,particles,pickups;
+let keys={},mouse={x:W/2,y:H/2};
+let shootCD=0,wave=0,waveTimer=0,boss=null,bossActive=false;
+
+function showMsg(t,d=90){const m=document.getElementById('gmsg');m.textContent=t;m.style.opacity=1;setTimeout(()=>m.style.opacity=0,d*16);}
+
+function initGame(){
+  score=0;frame=0;wave=0;waveTimer=180;bossActive=false;boss=null;
+  W=canvas.width;H=canvas.height;
+  player={x:W/2,y:H/2,r:14,hp:100,maxHp:100,xp:0,xpNeeded:100,level:1,inv:0,spd:3.5};
+  bullets=[];enemies=[];particles=[];pickups=[];shootCD=0;updateUI();
+}
+
+function updateUI(){
+  document.getElementById('hpf').style.width=(player.hp/player.maxHp*100)+'%';
+  document.getElementById('hpv').textContent=Math.max(0,Math.floor(player.hp));
+  document.getElementById('xpf').style.width=(player.xp/player.xpNeeded*100)+'%';
+  document.getElementById('glvl').textContent='LV '+player.level;
+  document.getElementById('gscore').textContent='SCORE: '+score;
+}
+
+function spawnEnemy(type){
+  let side=Math.floor(Math.random()*4),x,y;
+  if(side===0){x=Math.random()*W;y=-20;}else if(side===1){x=W+20;y=Math.random()*H;}else if(side===2){x=Math.random()*W;y=H+20;}else{x=-20;y=Math.random()*H;}
+  if(type==='fast')enemies.push({x,y,r:8,hp:20,maxHp:20,spd:3.5,type:'fast',color:'#ff003c',sc:15});
+  else if(type==='tank')enemies.push({x,y,r:18,hp:80,maxHp:80,spd:1.2,type:'tank',color:'#7c3aed',sc:40});
+  else enemies.push({x,y,r:12,hp:40,maxHp:40,spd:2,type:'basic',color:'#ff6600',sc:20});
+}
+
+function spawnBoss(){bossActive=true;boss={x:W/2,y:-50,r:36,hp:400,maxHp:400,spd:1.2,st:0,ma:0};showMsg('!! BOSS INCOMING !!',150);}
+
+function spawnParts(x,y,color,n=8){for(let i=0;i<n;i++){let a=Math.random()*Math.PI*2,s=1+Math.random()*4;particles.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:30+Math.random()*30,color});}}
+
+function fire(fromPlayer=true,angle=0,fx=0,fy=0){
+  if(fromPlayer){let dx=mouse.x-player.x,dy=mouse.y-player.y,d=Math.hypot(dx,dy)||1;bullets.push({x:player.x,y:player.y,vx:dx/d*9,vy:dy/d*9,r:5,fp:true,dmg:10+player.level*2,color:'#00ffe7'});}
+  else bullets.push({x:fx,y:fy,vx:Math.cos(angle)*4,vy:Math.sin(angle)*4,r:6,fp:false,dmg:12,color:'#ff003c'});
+}
+
+function levelUp(){player.level++;player.xp-=player.xpNeeded;player.xpNeeded=Math.floor(player.xpNeeded*1.4);player.maxHp+=20;player.hp=Math.min(player.hp+30,player.maxHp);player.spd+=0.2;showMsg('LEVEL UP! LV '+player.level,120);spawnParts(player.x,player.y,'#ffe600',20);}
+
+function update(){
+  if(gstate!=='playing')return;
+  frame++;
+  let dx=0,dy=0;
+  if(keys['w']||keys['arrowup'])dy=-1;if(keys['s']||keys['arrowdown'])dy=1;
+  if(keys['a']||keys['arrowleft'])dx=-1;if(keys['d']||keys['arrowright'])dx=1;
+  let l=Math.hypot(dx,dy)||1;if(dx||dy){dx/=l;dy/=l;}
+  player.x=Math.max(player.r,Math.min(W-player.r,player.x+dx*player.spd));
+  player.y=Math.max(player.r,Math.min(H-player.r,player.y+dy*player.spd));
+  if(player.inv>0)player.inv--;
+  shootCD--;
+  if((keys[' ']||keys['space'])&&shootCD<=0){fire(true);shootCD=Math.max(6,14-player.level);}
+  waveTimer--;
+  if(waveTimer<=0&&enemies.length<3){
+    wave++;
+    if(wave%5===0){spawnBoss();}
+    else{showMsg('WAVE '+wave,90);let c=3+wave*2;for(let i=0;i<c;i++){let t=Math.random()<0.3?'fast':Math.random()<0.2?'tank':'basic';setTimeout(()=>spawnEnemy(t),i*300);}}
+    waveTimer=180+wave*20;
+  }
+  if(bossActive&&boss){
+    boss.ma+=0.008;boss.x+=Math.cos(boss.ma)*boss.spd*1.5;boss.y+=Math.sin(boss.ma*0.7)*boss.spd;
+    boss.y=Math.max(80,Math.min(H*0.5,boss.y));boss.x=Math.max(boss.r,Math.min(W-boss.r,boss.x));
+    boss.st++;let sr=boss.hp<boss.maxHp*0.5?40:70;
+    if(boss.st>=sr){boss.st=0;let nc=boss.hp<boss.maxHp*0.5?6:4;for(let i=0;i<nc;i++)fire(false,Math.PI*2/nc*i,boss.x,boss.y);fire(false,Math.atan2(player.y-boss.y,player.x-boss.x),boss.x,boss.y);}
+    bullets=bullets.filter(b=>{
+      if(!b.fp&&boss&&Math.hypot(b.x-player.x,b.y-player.y)<player.r+b.r){if(!player.inv){player.hp-=b.dmg;player.inv=40;spawnParts(player.x,player.y,'#ff003c',5);updateUI();}return false;}
+      if(b.fp&&boss&&Math.hypot(b.x-boss.x,b.y-boss.y)<boss.r+b.r){boss.hp-=b.dmg;spawnParts(b.x,b.y,'#ff003c',4);if(boss.hp<=0){spawnParts(boss.x,boss.y,'#ffe600',40);score+=500;bossActive=false;boss=null;showMsg('BOSS DEFEATED! +500',150);player.xp+=80;if(player.xp>=player.xpNeeded)levelUp();pickups.push({x:W/2,y:H/2,type:'hp',r:12,life:400});updateUI();}return false;}
+      return true;
+    });
+  }
+  enemies.forEach(e=>{let dx2=player.x-e.x,dy2=player.y-e.y,d=Math.hypot(dx2,dy2)||1;e.x+=dx2/d*e.spd;e.y+=dy2/d*e.spd;if(d<player.r+e.r&&!player.inv){player.hp-=0.4;player.inv=10;spawnParts(player.x,player.y,'#ff003c',3);updateUI();}});
+  bullets=bullets.filter(b=>{
+    b.x+=b.vx;b.y+=b.vy;
+    if(b.x<-20||b.x>W+20||b.y<-20||b.y>H+20)return false;
+    if(!b.fp)return true;
+    for(let i=enemies.length-1;i>=0;i--){let e=enemies[i];if(Math.hypot(b.x-e.x,b.y-e.y)<e.r+b.r){e.hp-=b.dmg;spawnParts(b.x,b.y,e.color,5);if(e.hp<=0){spawnParts(e.x,e.y,e.color,12);score+=e.sc;player.xp+=20;if(player.xp>=player.xpNeeded)levelUp();if(Math.random()<0.3)pickups.push({x:e.x,y:e.y,type:'hp',r:8,life:300});enemies.splice(i,1);updateUI();}return false;}}
+    return true;
+  });
+  pickups=pickups.filter(p=>{p.life--;if(Math.hypot(p.x-player.x,p.y-player.y)<player.r+p.r){player.hp=Math.min(player.maxHp,player.hp+30);showMsg('+30 HP',60);updateUI();return false;}return p.life>0;});
+  particles=particles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.vx*=0.9;p.vy*=0.9;p.life--;return p.life>0;});
+  if(player.hp<=0){gstate='dead';showDead();}
+}
+
+function showDead(){
+  const s=document.getElementById('gscreen');
+  s.innerHTML=`<h3 style="color:#ff003c">GAME OVER</h3><p>Score: ${score} &nbsp;|&nbsp; Level: ${player.level} &nbsp;|&nbsp; Wave: ${wave}</p><button id="gbtn" style="margin-top:8px;background:#00ffe7;color:#060610;border:none;padding:10px 28px;font-family:monospace;font-size:13px;font-weight:bold;letter-spacing:2px;cursor:pointer;text-transform:uppercase">Play Again</button>`;
+  s.style.display='flex';
+  document.getElementById('gbtn').onclick=()=>{s.style.display='none';initGame();gstate='playing';};
+}
+
+function drawGrid(){ctx.strokeStyle='rgba(0,255,231,0.04)';ctx.lineWidth=1;for(let x=0;x<W;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}for(let y=0;y<H;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}
+
+function drawPlayer(){
+  let p=player;if(p.inv>0&&Math.floor(p.inv/4)%2===0)return;
+  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(Math.atan2(mouse.y-p.y,mouse.x-p.x));
+  ctx.fillStyle='#00ffe7';ctx.beginPath();ctx.moveTo(16,0);ctx.lineTo(-10,10);ctx.lineTo(-6,0);ctx.lineTo(-10,-10);ctx.closePath();ctx.fill();
+  ctx.shadowBlur=18;ctx.shadowColor='#00ffe7';ctx.strokeStyle='#00ffe7';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(16,0);ctx.lineTo(-10,10);ctx.lineTo(-6,0);ctx.lineTo(-10,-10);ctx.closePath();ctx.stroke();
+  ctx.fillStyle='#fff';ctx.shadowBlur=0;ctx.beginPath();ctx.arc(4,0,4,0,Math.PI*2);ctx.fill();ctx.restore();
+}
+
+function drawEnemy(e){
+  ctx.save();ctx.translate(e.x,e.y);ctx.rotate(Math.atan2(player.y-e.y,player.x-e.x));
+  ctx.fillStyle=e.color;ctx.shadowBlur=12;ctx.shadowColor=e.color;
+  if(e.type==='fast'){ctx.beginPath();ctx.moveTo(12,0);ctx.lineTo(-8,7);ctx.lineTo(-8,-7);ctx.closePath();ctx.fill();}
+  else if(e.type==='tank'){ctx.fillRect(-e.r,-e.r,e.r*2,e.r*2);ctx.strokeStyle=e.color;ctx.lineWidth=2;ctx.strokeRect(-e.r,-e.r,e.r*2,e.r*2);}
+  else{ctx.beginPath();ctx.moveTo(14,0);ctx.lineTo(-8,10);ctx.lineTo(-4,0);ctx.lineTo(-8,-10);ctx.closePath();ctx.fill();}
+  ctx.shadowBlur=0;ctx.fillStyle='#1a1a2e';ctx.fillRect(-e.r,-e.r-10,e.r*2,4);ctx.fillStyle=e.color;ctx.fillRect(-e.r,-e.r-10,e.r*2*(e.hp/e.maxHp),4);ctx.restore();
+}
+
+function drawBoss(){
+  if(!boss)return;let b=boss;ctx.save();ctx.translate(b.x,b.y);
+  ctx.shadowBlur=30;ctx.shadowColor='#ff003c';ctx.strokeStyle='#ff003c';ctx.lineWidth=3;ctx.beginPath();ctx.arc(0,0,b.r+6,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#1a0010';ctx.beginPath();ctx.arc(0,0,b.r,0,Math.PI*2);ctx.fill();
+  ctx.strokeStyle='#ff003c';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,b.r,0,Math.PI*2);ctx.stroke();
+  ctx.fillStyle='#ff003c';ctx.shadowBlur=20;ctx.beginPath();ctx.arc(0,0,b.r*0.4,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='#fff';ctx.shadowBlur=0;ctx.beginPath();ctx.arc(4,-4,6,0,Math.PI*2);ctx.fill();
+  let bw=180;ctx.fillStyle='rgba(255,0,60,0.2)';ctx.fillRect(-bw/2,-b.r-18,bw,7);ctx.fillStyle='#ff003c';ctx.fillRect(-bw/2,-b.r-18,bw*(b.hp/b.maxHp),7);
+  ctx.font='bold 11px monospace';ctx.textAlign='center';ctx.fillStyle='#ff003c';ctx.fillText('BOSS',0,-b.r-24);ctx.restore();
+}
+
+function draw(){
+  ctx.fillStyle='#060610';ctx.fillRect(0,0,W,H);drawGrid();
+  if(gstate!=='playing')return;
+  particles.forEach(p=>{ctx.save();ctx.globalAlpha=p.life/60;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,3,0,Math.PI*2);ctx.fill();ctx.restore();});
+  pickups.forEach(p=>{ctx.save();ctx.translate(p.x,p.y+Math.sin(Date.now()/500)*4);ctx.shadowBlur=15;ctx.shadowColor='#ff003c';ctx.fillStyle='#ff003c';ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 10px monospace';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('+',0,0);ctx.restore();});
+  bullets.forEach(b=>{ctx.save();ctx.shadowBlur=10;ctx.shadowColor=b.color;ctx.fillStyle=b.color;ctx.beginPath();ctx.arc(b.x,b.y,b.r,0,Math.PI*2);ctx.fill();ctx.restore();});
+  enemies.forEach(drawEnemy);
+  if(bossActive)drawBoss();
+  drawPlayer();
+}
+
+function loop(){update();draw();requestAnimationFrame(loop);}
+loop();
+
+document.addEventListener('keydown',e=>{keys[e.key.toLowerCase()]=true;if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(e.key.toLowerCase()))e.preventDefault();});
+document.addEventListener('keyup',e=>{keys[e.key.toLowerCase()]=false;});
+canvas.addEventListener('mousemove',e=>{let r=canvas.getBoundingClientRect();mouse.x=(e.clientX-r.left)*(canvas.width/r.width);mouse.y=(e.clientY-r.top)*(canvas.height/r.height);});
+canvas.addEventListener('click',e=>{if(gstate==='playing'){let r=canvas.getBoundingClientRect();mouse.x=(e.clientX-r.left)*(canvas.width/r.width);mouse.y=(e.clientY-r.top)*(canvas.height/r.height);fire(true);}});
+
+document.getElementById('gbtn').onclick=()=>{document.getElementById('gscreen').style.display='none';initGame();gstate='playing';};
+window.addEventListener('resize',()=>{resize();W=canvas.width;H=canvas.height;});
+</script>
 </body>
 </html>
