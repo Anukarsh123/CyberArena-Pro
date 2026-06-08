@@ -1,37 +1,25 @@
 import pygame
 
-def draw_score(screen, score):
+def draw_level(screen, level, xp, xp_needed):
 
-    font = pygame.font.SysFont(None,40)
+    font = pygame.font.SysFont(None, 35)
 
-    text = font.render(
-        f"Score: {score}",
+    level_text = font.render(
+        f"Level: {level}",
         True,
         (255,255,255)
     )
 
-    screen.blit(text,(20,20))
-
-
-def draw_health_bar(screen, health, max_health):
-
-    ratio = health / max_health
+    screen.blit(level_text,(20,110))
 
     pygame.draw.rect(
         screen,
-        (255,0,0),
-        (20,70,200,25)
+        (100,100,100),
+        (20,150,250,20)
     )
 
     pygame.draw.rect(
         screen,
-        (0,255,0),
-        (20,70,200 * ratio,25)
-    )
-
-    pygame.draw.rect(
-        screen,
-        (255,255,255),
-        (20,70,200,25),
-        2
+        (0,255,255),
+        (20,150,250*(xp/xp_needed),20)
     )
